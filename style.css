@@ -1,8 +1,10 @@
+/* method - 1 */
 /*#ullist.li:disabled {
   color: #6c757d;
   text-decoration: line-through;
 }*/
 
+/* method 2   */
 li.list-group-item.done {
   text-decoration: line-through;
   color: #6c757d;

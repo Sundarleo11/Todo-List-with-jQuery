@@ -2,101 +2,55 @@ var ullist = $("#ullist");
 var add = $("#add");
 var Reset = $("#Reset");
 var task = $("#task");
-var clean= $("#Cleanup");
-var sort= $("#sort");
+var clean = $("#Cleanup");
+var sort = $("#sort");
 
-
-function cleanup(){
-  //console.log('hi');
- // console.log($('#ullist .done').remove());
-  $('#ullist .done').remove()
-  togglebutton()
+/* click Event function  for Add Reset Sort Clean */
+function cleanup() {
+  $("#ullist .done").remove();
+  togglebutton();
 }
 
-function additerm(){
+function additerm() {
   var item = $("<li>", {
     class: "list-group-item",
     text: task.val(),
-  })
+  });
 
   item.click((event) => {
-   item.toggleClass("done");
-  })
+    item.toggleClass("done");
+  });
   ullist.append(item);
   task.val("");
-  togglebutton()
-
+  togglebutton();
 }
 
-
-
-function togglebutton(){
-  
-   Reset.prop('disabled',task.val() =='');
-   add.prop('disabled',task.val() =='');
-   sort.prop('disabled',ullist.children().length < 1);
-   clean.prop('disabled',ullist.children().length < 1);
-  
-  
-  
+function togglebutton() {
+  Reset.prop("disabled", task.val() == "");
+  add.prop("disabled", task.val() == "");
+  sort.prop("disabled", ullist.children().length < 1);
+  clean.prop("disabled", ullist.children().length < 1);
 }
-/*
- function togglebutton(valIsEmpty){
-   if(!valIsEmpty){
-    Reset.prop('disabled',false);
-    add.prop('disabled',false);
-   } 
-   else {
-     Reset.prop('disabled',true);
-     add.prop('disabled',true);
-   }
-   
- }*/
 
-task.keypress((e)=>{
-//console.log(e.which);
-if(e.which==13) additerm();
+function sorttask() {
+  $("#ullist .done").appendTo(ullist);
+}
+
+//To check input length eq is 13
+task.keypress((e) => {
+  if (e.which == 13) additerm();
 }),
+  // input button task
+  task.on("input", togglebutton);
 
-task.on('input', togglebutton);
-/*
-task.on('input',()=>{
- // console.log(task.val())
-  //togglebutton(task.val() !='');// it will call enabled functon
-  togglebutton(task.val() =='');
-})*/
-
+/* click Event for Add Reset Sort Clean */
 add.click(additerm);
-/*
-add.click(() => {
-  // alert('hi');
-  // console.log(task.val());
-  var item = $("<li>", {
-    class: "list-group-item",
-    text: task.val(),
-  })
 
-  item.click((event) => {
-    //console.log("click",$(this));
-   // console.log(event, $(this));
-   //console.log("click", $(event.target));
-   //  $(event.target).toggleClass("disabled");
-   // item.toggleClass("disabled");
-     item.toggleClass("done");
-  })
-  ullist.append(item);
-  task.val("");
-});
-*/
-
-function sorttask(){
-  $('#ullist .done').appendTo(ullist);
-}
 Reset.click(() => {
-  task.val("")
+  task.val("");
   togglebutton();
 });
 
-
 sort.click(sorttask);
+
 clean.click(cleanup);
