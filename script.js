@@ -10,6 +10,7 @@ function cleanup(){
   //console.log('hi');
  // console.log($('#ullist .done').remove());
   $('#ullist .done').remove()
+  togglebutton()
 }
 
 function additerm(){
@@ -23,14 +24,47 @@ function additerm(){
   })
   ullist.append(item);
   task.val("");
+  togglebutton()
 
 }
+
+
+
+function togglebutton(){
+  
+   Reset.prop('disabled',task.val() =='');
+   add.prop('disabled',task.val() =='');
+   sort.prop('disabled',ullist.children().length < 1);
+   clean.prop('disabled',ullist.children().length < 1);
+  
+  
+  
+}
+/*
+ function togglebutton(valIsEmpty){
+   if(!valIsEmpty){
+    Reset.prop('disabled',false);
+    add.prop('disabled',false);
+   } 
+   else {
+     Reset.prop('disabled',true);
+     add.prop('disabled',true);
+   }
+   
+ }*/
 
 task.keypress((e)=>{
 //console.log(e.which);
 if(e.which==13) additerm();
 }),
 
+task.on('input', togglebutton);
+/*
+task.on('input',()=>{
+ // console.log(task.val())
+  //togglebutton(task.val() !='');// it will call enabled functon
+  togglebutton(task.val() =='');
+})*/
 
 add.click(additerm);
 /*
@@ -59,7 +93,8 @@ function sorttask(){
   $('#ullist .done').appendTo(ullist);
 }
 Reset.click(() => {
-  task.val("");
+  task.val("")
+  togglebutton();
 });
 
 
