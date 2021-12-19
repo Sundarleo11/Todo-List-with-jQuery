@@ -1,7 +1,16 @@
 var ullist = $("#ullist");
 var add = $("#add");
-var clear = $("#clear");
+var Reset = $("#Reset");
 var task = $("#task");
+var clean= $("#Cleanup");
+var sort= $("#sort");
+
+
+function cleanup(){
+  //console.log('hi');
+ // console.log($('#ullist .done').remove());
+  $('#ullist .done').remove()
+}
 
 function additerm(){
   var item = $("<li>", {
@@ -45,6 +54,14 @@ add.click(() => {
   task.val("");
 });
 */
-clear.click(() => {
+
+function sorttask(){
+  $('#ullist .done').appendTo(ullist);
+}
+Reset.click(() => {
   task.val("");
 });
+
+
+sort.click(sorttask);
+clean.click(cleanup);
